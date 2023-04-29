@@ -1,5 +1,6 @@
 "use strict"
 
+// Fetch to last values view
 const fetchLastValues = async() => {
 	try {
 		const response = await fetch('https://webapi19sa-1.course.tamk.cloud/v1/weather/limit/50')
@@ -13,6 +14,8 @@ const fetchLastValues = async() => {
 			const dateString = parsedDate.toLocaleDateString();
 			const timeString = parsedDate.toLocaleTimeString();
 
+			/*Checks which kind of data every value is. There might undefined ones if some other
+			 students are sending data to the API*/
 			if (item.data.humidity_out != undefined) 
 				value = 'Humidity out: ' + item.data.humidity_out;
 			else if (item.data.wind_direction != undefined)
@@ -40,24 +43,28 @@ const fetchLastValues = async() => {
 	}
 }
 
-
+// fetch function that takes signal name, time and which view(used to get right elementById) as parameters.
 async function fetchData(signal, timespan, whichPage) {
+
 	if (timespan == undefined)
 		timespan = "";
 	if (signal == undefined)
 		signal = "temperature";
 	if (whichPage == undefined)
 		whichPage = 0;
+	
 	try {
 		const response = await fetch(`https://webapi19sa-1.course.tamk.cloud/v1/weather/${signal}/${timespan}`)
 		const data = await response.json();
 		console.log(data);
 		let tab = '';
 		let datetimes= [];
+		
+		//creating table with date time and value
 		data.forEach(function(item) {
 			const date_time = item.date_time;
 			const parsedDate = new Date(date_time);
-			const dateString = parsedDate.toLocaleDateString();
+			const dateString = parsedDate.toLocaleDateString(); 
 			const timeString = parsedDate.toLocaleTimeString();
 			datetimes.push(dateString + " " + timeString);
 
@@ -67,6 +74,7 @@ async function fetchData(signal, timespan, whichPage) {
 			<td>${item[signal]}</td>
 			</tr>`
 		});
+
 		if (whichPage == 0)
 			document.getElementById('list-frontpage').innerHTML = tab;
 		else if (whichPage == 1)
@@ -76,26 +84,39 @@ async function fetchData(signal, timespan, whichPage) {
 
 		const values = data.map(item => item[signal])
 		console.log(values);
+
 		let element;
+		let graphType = 'line';
+		let color = 'red';
 		if (whichPage == 0)
-		element = 'frontpageGraph';
+			element = 'frontpageGraph';
 		else if (whichPage == 1)
-		element = "tempGraph";
-		else if (whichPage == 2)
-		element = 'lightGraph';
-		let chartStatus = Chart.getChart(element);
-		if (chartStatus != undefined)
+			element = "tempGraph";
+		else if (whichPage == 2){
+			element = 'lightGraph';
+			graphType = 'bar';
+			color = 'yellow';
+		}
+		
+		
+		
+		let chartStatus = Chart.getChart(element)
+
+		// destroys chart if there is all ready one to avoid errors
+		if (chartStatus != undefined)	
   			chartStatus.destroy();
 		const context = document.getElementById(element).getContext('2d');
+		
+		//creates a graph using charts.js
 		const myChart = new Chart(context, {
-		type: 'line',
+		type: graphType,
 		data: {
 			labels: datetimes,
 			datasets: [{
 				label:signal,
 				data:values,
-				backgroundColor: "red",
-				borderColor: "red",
+				backgroundColor:color,
+				borderColor: color,
 				borderWidth: 3
 			}],
 		},
@@ -117,6 +138,7 @@ async function fetchData(signal, timespan, whichPage) {
 			}
 		});
 
+		//displays statistics from the data using self made functions at statistics.js
 		const valuesRange = range(values);
 		tab = '';
 		tab = `
@@ -144,6 +166,7 @@ async function fetchData(signal, timespan, whichPage) {
 	}
 }
 
+// calls fetchData function with right parameters
 function handleDataChange(whichPage) {
 	let selectedSignal = 0;
 	let selectedTime = 0;

@@ -11,6 +11,7 @@
 	<title>Document</title>
 </head>
 <body>
+	<!-- Creating the navigation bar -->
 	<nav class="navbar navbar-expand-md">
 		<button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#main-navigation">
 			<span class="navbar-toggler-icon"></span>
@@ -34,6 +35,7 @@
 	</nav>
 
 	<br>
+	<!-- The main view with signal and time select -->
 	<div class="tab-content" id="myTabContent">
 		<div class="tab-pane fade show active box" id="weather" role="tabpanel" aria-labelledby="weather-tab">
 			<h2>Signal Values</h2>
@@ -84,6 +86,7 @@
 			</div>
 		</div>
 
+		<!-- Second view with only the last 50 values -->
 		<div class="tab-pane fade box" id="lastValues" role="tabpanel" aria-labelledby="lastValues-tab">
 			<table class="table table-striped" id="userTable">
 				<thead>
@@ -97,6 +100,7 @@
 			</table>
 		</div>
 
+		<!-- Thrid view, temperature with time select -->
 		<div class="tab-pane fade box" id="temperature" role="tabpanel" aria-labelledby="temperature-tab">
 			<h2>Temperature</h2>
 			<h5>Select time:</h5>
@@ -129,6 +133,7 @@
 			</table>
 		</div>
 
+		<!-- fourth view, light with time select -->
 		<div class="tab-pane fade box" id="light" role="tabpanel" aria-labelledby="light-tab">
 			<h2>Light</h2>
 			<h5>Select time:</h5>
@@ -161,11 +166,9 @@
 			</table>
 		</div>
 	</div>
-	<script 
-	src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js">
-	</script>
-	<script src="./backend/statistics.js" ></script>
-	<script src="./backend/script.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js"> </script>
+	<script src="./backend/statistics.js"> </script>
+	<script src="./backend/script.js"> </script>
 
 </body>
 </html>

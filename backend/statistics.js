@@ -5,7 +5,6 @@ function mean(values) {
 	values.forEach(function (value) {
 		total += +value;
 	})
-	console.log(total);
 	return total / values.length
 }
 
@@ -54,8 +53,10 @@ function range(values) {
 }
 
 function standardDeviation (values) {
+
 	var nbrValues = values.map(Number)
 	const n = nbrValues.length
 	const mean = nbrValues.reduce((a, b) => a + b) / n
-	return Math.sqrt(nbrValues.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n)
+
+	return Math.sqrt(nbrValues.map(x => Math.pow(x - valuesMean, 2)).reduce((a, b) => a + b) / n)
 }
