@@ -2,11 +2,16 @@ body{
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 	padding: 0;
 	margin: 0;
+	background-image: url("../image/weather.jpg");
+	background-size: cover;
+	background-attachment: fixed;
 
 }
 
 .navbar{
-	background-color:darkslategray;
+	background-color:steelblue;
+	margin: auto;
+	width: 85%;
 }
 
 .nav-link,
@@ -36,10 +41,6 @@ body{
 	text-align: center;
 }
 
-.description h1{
-	color: #6ab446;
-}
-
 .description p{
 	font-size: 1.3rem;
 	line-height: 1.5;
@@ -50,26 +51,13 @@ body{
 
 }
 
-#list-temperature{
-    background-color: aliceblue;
-    border: 1px black solid;
+.box {
+	width: 85%;
+	padding: 10px;
+	border: 5px ;
+	background-color: white;
+	margin: auto;
 }
-
-#list-lastValues{
-    background-color: aliceblue;
-    border: 1px black solid;
-}
-
-#list-windspeed{
-    background-color: aliceblue;
-    border: 1px black solid;
-}
-
-#userTable{
-    background-color: aliceblue;
-    border: 1px black solid;
-}
-
 
 .list-item-container {
     display:flex;
@@ -79,11 +67,66 @@ body{
     background-color: lightgrey;
 }
 
+#userTable{
+    background-color: aliceblue;
+    border: 1px black solid;
+}
+
 #detail-container-table {
     display: none;
 }
 
-table  {
-    padding-top: 20px;
-    width: 100%;
+#tempSelect, #lightSelect{
+	margin-bottom: 20px;
 }
+
+#fpTable {
+	background-color: aliceblue;
+    border: 1px black solid;
+}
+
+#setPage {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+#table {
+	flex: auto;
+	margin: 10px;
+}
+#select {
+	flex: 0,5;
+	margin-top: 10px;
+	margin-left: 40px;
+}
+
+#graph {
+	width: 50%;
+}
+
+@media screen and (max-width: 1180px) {
+	#setPage {
+	  flex-direction: column;
+	}
+	#table {
+		width: 80%;
+		margin: auto;
+	}
+	#select {
+		flex: 1;
+		margin: auto;
+	}
+	
+	#graph {
+		width: 80%;
+		margin: auto;
+	}
+	
+	#list-stats{
+    	background-color: aliceblue;
+    	border: 1px black solid;
+		width: auto;
+	}
+  }

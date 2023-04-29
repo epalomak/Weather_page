@@ -11,31 +11,79 @@
 </head>
 <body>
 	<nav class="navbar navbar-expand-md">
-		<!-- <a href="#mainpage" class="navbar-brand">Weather Station</a>
 		<button class="navbar-toggler navbar-dark" type="button" data-bs-toggle="collapse" data-bs-target="#main-navigation">
-		<span class="navbar-toggler-icon"></span>
-		</button> -->
+			<span class="navbar-toggler-icon"></span>
+		</button>
 		<div id="main-navigation" class="collapse navbar-collapse">
 			<ul class="nav nav-tabs" id="myTab" role="tablist">
 				<li class="nav-item" role="presentation">
-					<button class="nav-link active" id="weather-tab" data-bs-toggle="tab" data-bs-target="#weather" type="button" role="tab" aria-controls="Weather" aria-selected="false">Weather Station</button>
+					<button class="nav-link active" id="weather-tab" data-bs-toggle="tab" data-bs-target="#weather" type="button" role="tab" aria-controls="Weather" aria-selected="false" onclick="fetchData('temperature','', 0)">Weather Station</button>
 				</li>
 				<li class="nav-item" role="presentation">
-				<button class="nav-link" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="false">Last Values</button>
+					<button class="nav-link" id="lastValues-tab" data-bs-toggle="tab" data-bs-target="#lastValues" type="button" role="tab" aria-controls="lastValues" aria-selected="false" onclick="fetchLastValues()">Last Values</button>
 				</li>
 				<li class="nav-item" role="presentation">
-				<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Temperature</button>
+					<button class="nav-link" id="temperature-tab" data-bs-toggle="tab" data-bs-target="#temperature" type="button" role="tab" aria-controls="temperature" aria-selected="false" onclick=" fetchData('temperature','', 1)">Temperature</button>
 				</li>
 				<li class="nav-item" role="presentation">
-				<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Windspeed</button>
+					<button class="nav-link" id="light-tab" data-bs-toggle="tab" data-bs-target="#light" type="button" role="tab" aria-controls="light" aria-selected="false"  onclick="fetchData('light','', 2)">Light</button>
 				</li>
 			</ul>
 		</div>
 	</nav>
 
-	
+	<br>
 	<div class="tab-content" id="myTabContent">
-		<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+		<div class="tab-pane fade show active box" id="weather" role="tabpanel" aria-labelledby="weather-tab">
+			<h2>Signal Values</h2>
+			<div id="setPage">
+				<div id="table">
+					<table class="table table-striped" id="fpTable">
+						<thead>
+							<th >Date</th>
+							<th >Time</th>
+							<th >Value</th>
+						</thead>
+						<tbody id ="list-frontpage">
+						</tbody>
+					</table>
+				</div>
+				<div id="select">
+					<h5>Select signal:</h5>
+					<select id="dataSelect" onchange="handleDataChange(0)">
+						<option value="temperature">Temperature</option>
+						<option value="wind_direction">Wind direction</option>
+						<option value="rain">Rain</option>
+						<option value="wind_speed">windspeed</option>
+						<option value="light">light</option>
+						<option value="humidity_out"> Humidity out </option>
+						<option value="humidity_in"> Humidity in </option>
+					</select>
+					<h5>Select time:</h5>
+					<select id="timeSelect" onchange="handleDataChange(0)">
+						<option value="">Now</option>
+						<option value="24">Last 24 hours</option>
+						<option value="48">Last 48 hours</option>
+						<option value="72">Last 72 hours</option>
+						<option value="168">Last week</option>
+						<option value="720">Last month</option>
+					</select>
+					</div>
+				<div id="graph">
+					<canvas id="frontpageGraph"> </canvas>
+					<br>
+					<table class="table table-striped" id="statisticTable">
+						<thead>
+							<h3>Statistics</h3>
+						</thead>
+						<tbody id ="list-stats">
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<div class="tab-pane fade box" id="lastValues" role="tabpanel" aria-labelledby="lastValues-tab">
 			<table class="table table-striped" id="userTable">
 				<thead>
 					<h2>Last Values</h2>
@@ -44,39 +92,78 @@
 					<th >Value</th>
 				</thead>
 				<tbody id ="list-lastValues">
-
 				</tbody>
 			</table>
 		</div>
 
-		<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">	
+		<div class="tab-pane fade box" id="temperature" role="tabpanel" aria-labelledby="temperature-tab">
+			<h2>Temperature</h2>
+			<h5>Select time:</h5>
+			<select id="tempSelect" onchange="handleDataChange(1)">
+				<option value="">Now</option>
+				<option value="24">Last 24 hours</option>
+				<option value="48">Last 48 hours</option>
+				<option value="72">Last 72 hours</option>
+				<option value="168">Last week</option>
+				<option value="720">Last month</option>
+			</select>	
 			<table class="table table-striped" id="userTable">
 				<thead>
-					<h2>Temperature</h2>
 					<th >Date</th>
 					<th >Time</th>
 					<th >Temperature</th>
 				</thead>
 				<tbody id ="list-temperature">
-
+				</tbody>
+			</table>
+			<div style="width: 80%">
+				<canvas id="tempGraph"> </canvas>
+			</div>
+			<table class="table table-striped" id="statisticTable">
+				<thead>
+					<h2>Statistics</h2>
+				</thead>
+				<tbody id ="list-tempStats">
 				</tbody>
 			</table>
 		</div>
 
-		<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+		<div class="tab-pane fade box" id="light" role="tabpanel" aria-labelledby="light-tab">
+			<h2>Light</h2>
+			<h5>Select time:</h5>
+			<select id="lightSelect" onchange="handleDataChange(2)">
+				<option value="">Now</option>
+				<option value="24">Last 24 hours</option>
+				<option value="48">Last 48 hours</option>
+				<option value="72">Last 72 hours</option>
+				<option value="168">Last week</option>
+				<option value="720">Last month</option>
+			</select>
 			<table class="table table-striped" id="userTable">
 				<thead>
-					<h2>Windspeed</h2>
 					<th >Date</th>
 					<th >Time</th>
-					<th >Windspeed</th>
+					<th >Value</th>
 				</thead>
-				<tbody id ="list-windspeed">
-
+				<tbody id ="list-light">
+				</tbody>
+			</table>
+			<div style="width: 80%">
+				<canvas id="lightGraph"> </canvas>
+			</div>
+			<table class="table table-striped" id="statisticTable">
+				<thead>
+					<h2>Statistics</h2>
+				</thead>
+				<tbody id ="list-lightStats">
 				</tbody>
 			</table>
 		</div>
 	</div>
+	<script 
+	src="https://cdn.jsdelivr.net/npm/chart.js@4.2.1/dist/chart.umd.min.js">
+	</script>
+	<script src="../backend/statistics.js" ></script>
 	<script src="../backend/script.js"></script>
 
 </body>
