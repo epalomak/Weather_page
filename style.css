@@ -1,0 +1,132 @@
+body{
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+	padding: 0;
+	margin: 0;
+	background-image: url("./image/weather.jpg");
+	background-size: cover;
+	background-attachment: fixed;
+
+}
+
+.navbar{
+	background-color:steelblue;
+	margin: auto;
+	width: 85%;
+}
+
+.nav-link,
+.navbar-brand{
+	color: #fff;
+	cursor: pointer;
+}
+
+.nav-link{
+	margin-right: 1em;
+}
+
+.nav-link:hover,
+.navbar-brand:hover {
+	color: black;
+}
+
+.navbar-collapse{
+	justify-content: flex-start;
+} 
+
+.description{
+	left: 50%;
+	position: absolute;
+	top: 45%;
+	transform: translate(-50%,-55%);
+	text-align: center;
+}
+
+.description p{
+	font-size: 1.3rem;
+	line-height: 1.5;
+}
+
+.features{
+	position: relative;
+
+}
+
+.box {
+	width: 85%;
+	padding: 10px;
+	border: 5px ;
+	background-color: white;
+	margin: auto;
+}
+
+.list-item-container {
+    display:flex;
+}
+
+.list-item-container:hover {
+    background-color: lightgrey;
+}
+
+#userTable{
+    background-color: aliceblue;
+    border: 1px black solid;
+}
+
+#detail-container-table {
+    display: none;
+}
+
+#tempSelect, #lightSelect{
+	margin-bottom: 20px;
+}
+
+#fpTable {
+	background-color: aliceblue;
+    border: 1px black solid;
+}
+
+#setPage {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: flex-start;
+}
+
+#table {
+	flex: auto;
+	margin: 10px;
+}
+#select {
+	flex: 0,5;
+	margin-top: 10px;
+	margin-left: 40px;
+}
+
+#graph {
+	width: 50%;
+}
+
+@media screen and (max-width: 1180px) {
+	#setPage {
+	  flex-direction: column;
+	}
+	#table {
+		width: 80%;
+		margin: auto;
+	}
+	#select {
+		flex: 1;
+		margin: auto;
+	}
+	
+	#graph {
+		width: 80%;
+		margin: auto;
+	}
+	
+	#list-stats{
+    	background-color: aliceblue;
+    	border: 1px black solid;
+		width: auto;
+	}
+  }
