@@ -6,13 +6,13 @@ https://tite-5g00fy11.github.io/2023-wk14-final-project-epalomak/ from here you 
 There is Four different tabs: Weather station, last values, temperature and light. the nav bar and tab 
 navigation were made using bootstrap 5. When you press any of the tabs page will fetch data on tap and display it. 
 Time and signal selects are made using htmls <select> and it's onchange ability.
- 
- ## Weather station view
+
+# Weather station view
   On default this view will show you the latest 20 temperature values. From the middle you can choose signal 
 (Temperature, wind direction, rain, windspeed, light or humidity in/out) and what timespan you want.
 Page will then show signal data a graph from it and some statistics.
 
-## Last values view
+##Last values view
   This view fetches the last 50 values from the database with name and value of the data. There might be some undefined data
 if other students have sent data to the API with different names.
 
