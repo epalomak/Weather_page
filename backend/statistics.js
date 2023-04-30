@@ -5,7 +5,7 @@ function mean(values) {
 	values.forEach(function (value) {
 		total += +value;
 	})
-	return total / values.length
+	return (total / values.length);
 }
 
 function median(values){
@@ -20,7 +20,7 @@ function median(values){
 	if(nbrValues.length % 2)
 		return nbrValues[half];
 	
-	return (nbrValues[half - 1] + nbrValues[half]) / 2.0;
+	return ((nbrValues[half - 1] + nbrValues[half]) / 2.0);
 	
 }
 
@@ -49,14 +49,14 @@ function range(values) {
 	
 	values.sort((a,b) => a - b);
 
-	return [values[0], values[values.length -1]]
+	return [values[0], values[values.length -1]];
 }
 
 function standardDeviation (values) {
 
-	var nbrValues = values.map(Number)
-	const n = nbrValues.length
+	var nbrValues = values.map(Number);
+	const n = nbrValues.length;
 	const mean = nbrValues.reduce((a, b) => a + b) / n
 
-	return Math.sqrt(nbrValues.map(x => Math.pow(x - valuesMean, 2)).reduce((a, b) => a + b) / n)
+	return Math.sqrt(nbrValues.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n);
 }
