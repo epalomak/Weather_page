@@ -6,6 +6,14 @@ There is Four different tabs: Weather station, last values, temperature and ligh
 navigation were made using bootstrap 5. When you press any of the tabs page will fetch data on tap and display it. 
 Time and signal selects are made using html select and it's onchange ability.
 
+
+##  Video
+
+
+https://user-images.githubusercontent.com/58777327/235353542-22f315f7-aa87-4e9f-a569-c40333a42064.mp4
+
+
+
 ## Weather station view
 On default this view will show you the latest 20 temperature values. From the middle you can choose signal 
 (Temperature, wind direction, rain, windspeed, light or humidity in/out) and what timespan you want.
@@ -40,10 +48,6 @@ Pretty much same as temperature view only the graph is a bar graph and different
   <img src="https://user-images.githubusercontent.com/58777327/235351971-c4291575-118c-42cd-91b8-030dc9fd26e4.png" width = 49%>
   <img src="https://user-images.githubusercontent.com/58777327/235352025-b852e054-90d1-4d03-a520-ffe8c918095d.png" width = 49%>
 </p>
-
-
-##  Video
-video here.
 
 ## Js files
 in script.js there is two fetch functions. One is for the last 50 values and the other for everything else. I did it this
