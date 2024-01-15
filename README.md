@@ -1,7 +1,6 @@
 
 # Weather Page
 This is a simple website that fetches data from API and displays it.<br>
-From here you can check the site https://tite-5g00fy11.github.io/2023-wk14-final-project-epalomak/ .<br>
 There is Four different tabs: Weather station, last values, temperature and light. the nav bar and tab
 navigation were made using bootstrap 5. When you press any of the tabs page will fetch data on tap and display it. 
 Time and signal selects are made using html select and it's onchange ability.
